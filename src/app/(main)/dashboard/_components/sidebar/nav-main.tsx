@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { PlusCircleIcon, MailIcon, ChevronRight } from "lucide-react";
+import { ChevronRight, LogOut } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
-import AddFollower from "@/components/dashboard/follower/add-follower";
-import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   DropdownMenu,
@@ -145,6 +144,7 @@ const NavItemCollapsed = ({
 export function NavMain({ items }: NavMainProps) {
   const path = usePathname();
   const { state, isMobile } = useSidebar();
+  const { data: session } = useSession();
 
   const isItemActive = (url: string, subItems?: NavMainItem["subItems"]) => {
     if (subItems?.length) {
@@ -191,6 +191,20 @@ export function NavMain({ items }: NavMainProps) {
                   <NavItemExpanded key={item.title} item={item} isActive={isItemActive} isSubmenuOpen={isSubmenuOpen} />
                 );
               })}
+              {session && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    aria-disabled={false}
+                    tooltip={"Đăng xuất"}
+                    isActive={false}
+                    className="cursor-pointer"
+                    onClick={() => signOut({ callbackUrl: "/dashboard/default" })}
+                  >
+                    <LogOut />
+                    <span>Đăng xuất</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
