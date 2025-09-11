@@ -47,7 +47,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   // },
   {
     accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Follower ID" />,
     cell: ({ row }) => {
       return <TableCellViewer item={row.original} />;
     },
@@ -55,9 +55,9 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     enableHiding: false,
   },
   {
-    accessorKey: "company",
+    accessorKey: "masterId",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
-    cell: ({ row }) => <span>{row.original.company}</span>,
+    cell: ({ row }) => <span>{row.original.masterId}</span>,
     enableSorting: false,
   },
   // {
@@ -73,21 +73,31 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   //   enableSorting: false,
   // },
   {
-    accessorKey: "lastActivity",
+    accessorKey: "password",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.password}</span>,
     enableSorting: false,
+    meta: { title: "Mật khẩu" },
   },
   {
-    accessorKey: "lastActivie",
+    accessorKey: "createdAt",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày tạo" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    meta: { title: "Ngày tạo" },
+    cell: ({ row }) => {
+      const date = row.original.createdAt ? new Date(row.original.createdAt) : "Không dữ liệu";
+
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: false,
   },
   {
-    accessorKey: "lastActivitys",
+    accessorKey: "updatedAt",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày cập nhật" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    meta: { title: "Ngày update" },
+    cell: ({ row }) => {
+      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "Không dữ liệu";
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: false,
   },
   {

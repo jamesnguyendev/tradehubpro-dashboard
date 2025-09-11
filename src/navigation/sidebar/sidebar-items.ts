@@ -45,11 +45,6 @@ export const sidebarItems: NavGroup[] = [
         url: "/dashboard/master",
         icon: MessageSquare,
       },
-      {
-        title: "Đăng nhập",
-        url: "/auth/v1/login",
-        icon: Fingerprint,
-      },
     ],
   },
   // {

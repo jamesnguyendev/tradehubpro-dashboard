@@ -8,13 +8,21 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardAction }
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 
 import { recentLeadsColumns } from "./columns.crm";
-import { recentLeadsData } from "./crm.config";
 
-export function TableCards() {
+interface follower {
+  _id: string;
+  id: number;
+  masterId: number;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function TableCards({ data }: { data: follower[] }) {
   const table = useDataTableInstance({
-    data: recentLeadsData,
+    data: data,
     columns: recentLeadsColumns,
-    getRowId: (row) => row.id.toString(),
+    getRowId: (row, index) => row._id || index.toString(),
   });
 
   return (

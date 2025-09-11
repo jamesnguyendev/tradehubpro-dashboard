@@ -5,7 +5,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -49,22 +48,21 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{item.company}</DrawerTitle>
-          <DrawerDescription>Xem chi tiết thông tin</DrawerDescription>
+          <DrawerTitle>Xem chi tiết thông tin</DrawerTitle>
         </DrawerHeader>
         <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
               <Label htmlFor="header">Follower ID</Label>
-              <Input id="header" defaultValue={item.source} />
+              <Input id="header" defaultValue={item.id} />
             </div>
             <div className="flex flex-col gap-3">
               <Label htmlFor="header">Master ID</Label>
-              <Input id="header" defaultValue={item.source} />
+              <Input id="header" defaultValue={item.masterId} />
             </div>
             <div className="flex flex-col gap-3">
               <Label htmlFor="reviewer">Mật khẩu</Label>
-              <Input id="header" type="password" defaultValue={"ik*****flsd****f"} />
+              <Input id="header" type="password" defaultValue={item.password} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
@@ -73,7 +71,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
                   id="header"
                   className="cursor-not-allowed disabled:opacity-20"
                   readOnly
-                  defaultValue={"2025 14:38:05"}
+                  defaultValue={item.createdAt}
                 />
               </div>
               <div className="flex flex-col gap-3">
@@ -82,7 +80,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
                   id="header"
                   className="cursor-not-allowed disabled:opacity-20"
                   readOnly
-                  defaultValue={"2025 14:38:05"}
+                  defaultValue={item.updatedAt}
                 />
               </div>
             </div>
