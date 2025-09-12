@@ -13,8 +13,8 @@ export function DeleteConfirm({ id }: { id: number }) {
 
   const handleDelete = () => {
     DeleteFollower(id);
-    setOpen(false);
     router.refresh();
+    setOpen(false);
   };
 
   return (
