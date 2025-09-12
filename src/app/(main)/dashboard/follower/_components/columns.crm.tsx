@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { DeleteConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
 import { TableCellViewer } from "./table-cell-viewer";
 
@@ -103,7 +104,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   {
     header: "Hành động",
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
@@ -114,7 +115,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
         <DropdownMenuContent align="end" className="w-32">
           <DropdownMenuItem>Sửa</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Xóa</DropdownMenuItem>
+          <DeleteConfirm id={row.original.id} />
         </DropdownMenuContent>
       </DropdownMenu>
     ),

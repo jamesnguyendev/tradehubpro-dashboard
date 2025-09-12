@@ -27,3 +27,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to create follower" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    await connectToDatabase();
+
+    const { id } = await req.json();
+
+    await Follower.deleteOne({ id });
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error deleting follower:", error);
+    return NextResponse.json({ error: "Failed to delete follower" }, { status: 500 });
+  }
+}
