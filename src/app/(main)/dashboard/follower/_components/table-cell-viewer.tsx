@@ -42,7 +42,7 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
       <DrawerTrigger asChild>
-        <Button variant="link" className="text-foreground w-fit px-0 text-left">
+        <Button variant="link" className="text-foreground w-fit cursor-pointer px-0 text-left">
           {item.id}
         </Button>
       </DrawerTrigger>
@@ -63,26 +63,6 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
             <div className="flex flex-col gap-3">
               <Label htmlFor="reviewer">Mật khẩu</Label>
               <Input id="header" type="password" defaultValue={item.password} />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="reviewer">Ngày tạo</Label>
-                <Input
-                  id="header"
-                  className="cursor-not-allowed disabled:opacity-20"
-                  readOnly
-                  defaultValue={item.createdAt}
-                />
-              </div>
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="reviewer">Ngày cập nhật</Label>
-                <Input
-                  id="header"
-                  className="cursor-not-allowed disabled:opacity-20"
-                  readOnly
-                  defaultValue={item.updatedAt}
-                />
-              </div>
             </div>
           </form>
         </div>
