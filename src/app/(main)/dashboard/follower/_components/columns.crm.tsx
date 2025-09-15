@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -15,6 +14,7 @@ import {
 import { DeleteConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
 import { TableCellViewer } from "./table-cell-viewer";
+import { UpdateFollower } from "./update-follower";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   // {
@@ -61,18 +61,6 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     cell: ({ row }) => <span>{row.original.masterId}</span>,
     enableSorting: false,
   },
-  // {
-  //   accessorKey: "status",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
-  //   cell: ({ row }) => <Badge variant="secondary">{row.original.status}</Badge>,
-  //   enableSorting: false,
-  // },
-  // {
-  //   accessorKey: "source",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Source" />,
-  //   cell: ({ row }) => <Badge variant="outline">{row.original.source}</Badge>,
-  //   enableSorting: false,
-  // },
   {
     accessorKey: "password",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
@@ -113,7 +101,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Sửa</DropdownMenuItem>
+          <UpdateFollower item={row.original} />
           <DropdownMenuSeparator />
           <DeleteConfirm id={row.original.id} />
         </DropdownMenuContent>

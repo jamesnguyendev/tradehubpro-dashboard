@@ -42,3 +42,24 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ error: "Failed to delete follower" }, { status: 500 });
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    await connectToDatabase();
+
+    const { id, masterId, password } = await req.json();
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!id) {
+      return NextResponse.json({ error: "Missing id" }, { status: 400 });
+    }
+
+    await Follower.findOneAndUpdate({ id }, { $set: { masterId, password: hashedPassword } }, { new: true });
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error putting follower:", error);
+    return NextResponse.json({ error: "Failed to put follower" }, { status: 500 });
+  }
+}

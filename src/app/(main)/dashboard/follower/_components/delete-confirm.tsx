@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { DeleteFollower } from "@/actions/follower/delete-follower";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export function DeleteConfirm({ id }: { id: number }) {
