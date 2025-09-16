@@ -47,7 +47,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   // },
   {
     accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
     cell: ({ row }) => {
       return <TableCellViewer item={row.original} />;
     },
@@ -55,64 +55,68 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     enableHiding: false,
   },
   {
-    accessorKey: "company",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
-    cell: ({ row }) => <span>{row.original.company}</span>,
+    accessorKey: "name",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Tên" />,
+    cell: ({ row }) => <span>{row.original.name}</span>,
     enableSorting: false,
+    meta: { title: "Tên" },
   },
-  // {
-  //   accessorKey: "status",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
-  //   cell: ({ row }) => <Badge variant="secondary">{row.original.status}</Badge>,
-  //   enableSorting: false,
-  // },
-  // {
-  //   accessorKey: "source",
-  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Source" />,
-  //   cell: ({ row }) => <Badge variant="outline">{row.original.source}</Badge>,
-  //   enableSorting: false,
-  // },
   {
-    accessorKey: "lastActivity",
+    accessorKey: "server",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Máy chủ" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.server}</span>,
+    enableSorting: false,
+    meta: { title: "Máy chủ" },
+  },
+  {
+    accessorKey: "period",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Chu kỳ" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.period}</span>,
+    enableSorting: false,
+    meta: { title: "Chu kỳ" },
+  },
+  {
+    accessorKey: "percent",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Phần trăm" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.percent}</span>,
+    enableSorting: false,
+    meta: { title: "Phần trăm" },
+  },
+  {
+    accessorKey: "balance",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Số dư" />,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.balance}</span>,
+    enableSorting: false,
+    meta: { title: "Số dư" },
+  },
+  {
+    accessorKey: "password",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.password}</span>,
     enableSorting: false,
+    meta: { title: "Mật khẩu" },
   },
   {
-    accessorKey: "d",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Server" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: "ds",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Period" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: "dsf",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Percent" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: "fe",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Balance" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: "lastActivie",
+    accessorKey: "createdAt",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày tạo" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    cell: ({ row }) => {
+      const date = row.original.createdAt ? new Date(row.original.createdAt) : "Không dữ liệu";
+
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: false,
+    meta: { title: "Ngày tạo" },
   },
   {
-    accessorKey: "lastActivitys",
+    accessorKey: "updatedAt",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày cập nhật" />,
-    cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.source}</span>,
+    cell: ({ row }) => {
+      const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "Không dữ liệu";
+
+      return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
+    },
     enableSorting: false,
+    meta: { title: "Ngày cập nhật" },
   },
   {
     id: "actions",

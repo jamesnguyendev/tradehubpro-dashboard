@@ -1,10 +1,14 @@
 import z from "zod";
 
 export const recentLeadSchema = z.object({
-  id: z.string(),
+  _id: z.string(),
+  id: z.number(),
   name: z.string(),
-  company: z.string(),
-  status: z.string(),
-  source: z.string(),
-  lastActivity: z.string(),
+  password: z.string(),
+  server: z.string(),
+  period: z.number(),
+  percent: z.number(),
+  balance: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });

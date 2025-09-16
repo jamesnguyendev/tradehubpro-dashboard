@@ -1,9 +1,15 @@
+import { getMasters } from "@/actions";
+
 import { TableCards } from "./_components/table-cards";
 
-export default function Page() {
+export default async function Page() {
+  const masters = await getMasters();
+  if (!masters) {
+    return <div>Không có masters</div>;
+  }
   return (
     <div className="flex flex-col gap-4 md:gap-6">
-      <TableCards />
+      <TableCards data={masters} />
     </div>
     // <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
     //   <div className="flex flex-col gap-4 lg:col-span-1">
