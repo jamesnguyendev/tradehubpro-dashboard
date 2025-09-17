@@ -1,4 +1,4 @@
-import { MessageSquare, Users, Fingerprint, LayoutDashboard, type LucideIcon } from "lucide-react";
+import { MessageSquare, Users, LayoutDashboard, type LucideIcon, LogOut } from "lucide-react";
 
 export interface NavSubItem {
   title: string;
@@ -35,6 +35,12 @@ export const sidebarItems: NavGroup[] = [
         url: "/dashboard/default",
         icon: LayoutDashboard,
       },
+    ],
+  },
+  {
+    id: 2,
+    label: "Copy Trade",
+    items: [
       {
         title: "Follower",
         url: "/dashboard/follower",
@@ -47,19 +53,4 @@ export const sidebarItems: NavGroup[] = [
       },
     ],
   },
-  // {
-  //   id: 2,
-  //   label: "Mục khác",
-  //   items: [
-  //     {
-  //       title: "Xác thực",
-  //       url: "/auth",
-  //       icon: Fingerprint,
-  //       subItems: [
-  //         { title: "Đăng nhập", url: "/auth/v1/login", newTab: false },
-  //         { title: "Đăng ký", url: "/auth/v1/register", newTab: false },
-  //       ],
-  //     },
-  //   ],
-  // },
 ];
