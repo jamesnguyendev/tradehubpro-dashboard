@@ -14,12 +14,12 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -50,7 +50,7 @@ const formSchema = z.object({
   }),
 });
 
-export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchema> }) {
+const UpdateMaster = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
   const isMobile = useIsMobile();
   const router = useRouter();
 
@@ -98,14 +98,17 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
       <DrawerTrigger asChild>
-        <Button variant="link" className="text-foreground w-fit px-0 text-left">
-          {item.id}
-        </Button>
+        <DropdownMenuItem
+          onSelect={(e) => {
+            e.preventDefault();
+          }}
+        >
+          Sửa
+        </DropdownMenuItem>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{item.name}</DrawerTitle>
-          <DrawerDescription>Xem chi tiết thông tin</DrawerDescription>
+          <DrawerTitle>Xem chi tiết thông tin</DrawerTitle>
         </DrawerHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col gap-4">
@@ -220,4 +223,6 @@ export function TableCellViewer({ item }: { item: z.infer<typeof recentLeadSchem
       </DrawerContent>
     </Drawer>
   );
-}
+};
+
+export default UpdateMaster;

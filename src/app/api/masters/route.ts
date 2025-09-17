@@ -43,23 +43,27 @@ export async function DELETE(req: Request) {
   }
 }
 
-// export async function PUT(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function PUT(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id, masterId, password } = await req.json();
+    const { id, server, period, percent, balance, name, password } = await req.json();
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-//     if (!id) {
-//       return NextResponse.json({ error: "Missing id" }, { status: 400 });
-//     }
+    if (!id) {
+      return NextResponse.json({ error: "Missing Master id" }, { status: 400 });
+    }
 
-//     await Follower.findOneAndUpdate({ id }, { $set: { masterId, password: hashedPassword } }, { new: true });
+    await Master.findOneAndUpdate(
+      { id },
+      { $set: { server, period, percent, balance, name, password: hashedPassword } },
+      { new: true },
+    );
 
-//     return NextResponse.json({ status: 200 });
-//   } catch (error) {
-//     console.error("Error putting follower:", error);
-//     return NextResponse.json({ error: "Failed to put follower" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error putting Master:", error);
+    return NextResponse.json({ error: "Failed to put Master" }, { status: 500 });
+  }
+}

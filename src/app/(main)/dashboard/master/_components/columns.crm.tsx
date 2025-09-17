@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -15,6 +14,7 @@ import {
 import { MasterConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
 import { TableCellViewer } from "./table-cell-viewer";
+import UpdateMaster from "./update-master";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   // {
@@ -131,7 +131,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Sửa</DropdownMenuItem>
+          <UpdateMaster item={row.original} />
           <DropdownMenuSeparator />
           <MasterConfirm id={row.original.id} />
         </DropdownMenuContent>
