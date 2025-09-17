@@ -25,25 +25,25 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const formSchema = z.object({
   id: z.coerce.number().min(3, {
-    message: "Master ID ít nhất 3 ký tự.",
+    message: "Master ID không hợp lệ.",
   }),
   name: z.string().min(3, {
-    message: "Tên ít nhất 3 ký tự.",
+    message: "Tên không hợp lệ.",
   }),
   password: z.string().min(3, {
-    message: "Mật khẩu ít nhất 3 ký tự.",
+    message: "Mật khẩu không hợp lệ.",
   }),
   server: z.string().min(3, {
-    message: "Máy chủ ít nhất 3 ký tự.",
+    message: "Máy chủ không hợp lệ.",
   }),
   period: z.coerce.number().min(3, {
-    message: "Chu kỳ ít nhất 3 ký tự.",
+    message: "Chu kỳ không hợp lệ.",
   }),
   percent: z.coerce.number().min(3, {
-    message: "Phần trăm ít nhất 3 ký tự.",
+    message: "Phần trăm không hợp lệ.",
   }),
   balance: z.coerce.number().min(3, {
-    message: "Chu kỳ ít nhất 3 ký tự.",
+    message: "Chu kỳ không hợp lệ.",
   }),
 });
 
