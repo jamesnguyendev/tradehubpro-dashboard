@@ -18,12 +18,8 @@ import {
 
 const searchItems = [
   { group: "Tổng quan", icon: LayoutDashboard, label: "Trang chủ", link: "/dashboard/default" },
-  { group: "Tổng quan", icon: Users, label: "Follower", link: "/dashboard/follower", disabled: true },
-  { group: "Tổng quan", icon: MessageSquare, label: "Master", link: "/dashboard/master", disabled: true },
-  { group: "Xác thực", label: "Đăng nhập", link: "/auth/v1/login" },
-  // { group: "Authentication", label: "Login v2" },
-  // { group: "Authentication", label: "Register v1" },
-  // { group: "Authentication", label: "Register v2" },
+  { group: "Copy Trade", icon: Users, label: "Follower", link: "/dashboard/follower", disabled: true },
+  { group: "Copy Trade", icon: MessageSquare, label: "Master", link: "/dashboard/master", disabled: true },
 ];
 
 export function SearchDialog() {
