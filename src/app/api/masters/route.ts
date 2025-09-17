@@ -28,20 +28,20 @@ export async function POST(req: Request) {
   }
 }
 
-// export async function DELETE(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function DELETE(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id } = await req.json();
+    const { id } = await req.json();
 
-//     await Follower.deleteOne({ id });
+    await Master.deleteOne({ id });
 
-//     return NextResponse.json({ status: 200 });
-//   } catch (error) {
-//     console.error("Error deleting follower:", error);
-//     return NextResponse.json({ error: "Failed to delete follower" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error deleting Master:", error);
+    return NextResponse.json({ error: "Failed to delete Master" }, { status: 500 });
+  }
+}
 
 // export async function PUT(req: Request) {
 //   try {
