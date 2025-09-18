@@ -41,8 +41,8 @@ export function TableCards({ data }: { data: master[] }) {
               <DebouncedInput
                 value={table.getState().globalFilter ?? ""}
                 onChange={(value) => table.setGlobalFilter(String(value))}
-                className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 outline-none has-[>svg]:px-2.5"
-                placeholder="Tìm tất cả nội dung"
+                className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 text-sm font-medium outline-none has-[>svg]:px-2.5"
+                placeholder="Tìm: ID, Tên, Chu kỳ, v.v..."
               />
               <DataTableViewOptions table={table} />
               <AddMaster />

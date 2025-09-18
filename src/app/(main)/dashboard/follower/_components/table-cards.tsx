@@ -1,5 +1,6 @@
 "use client";
 
+import DebouncedInput from "@/components/custom/debounce-input";
 import AddFollower from "@/components/dashboard/follower/add-follower";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
@@ -33,6 +34,12 @@ export function TableCards({ data }: { data: follower[] }) {
           <CardDescription>Theo dõi và quản lý trạng thái của họ.</CardDescription>
           <CardAction>
             <div className="flex items-center gap-2">
+              <DebouncedInput
+                value={table.getState().globalFilter ?? ""}
+                onChange={(value) => table.setGlobalFilter(String(value))}
+                className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 text-sm font-medium outline-none has-[>svg]:px-2.5"
+                placeholder="Tìm: Follower, Master."
+              />
               <DataTableViewOptions table={table} />
               <AddFollower />
             </div>

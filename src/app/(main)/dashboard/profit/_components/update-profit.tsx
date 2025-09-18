@@ -60,7 +60,6 @@ const UpdateProfit = ({ item }: { item: z.infer<typeof recentLeadSchema> }) => {
         masterId: values.masterId,
         profit: values.profit,
       };
-      console.log(data);
 
       const res = await updateProfit(data);
 
