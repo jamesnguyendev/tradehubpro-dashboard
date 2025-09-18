@@ -130,7 +130,7 @@ const AddMaster = () => {
                     <FormItem className="flex flex-col gap-3">
                       <FormLabel htmlFor="Name">Name</FormLabel>
                       <FormControl>
-                        <Input {...field} id="Name" placeholder="600xxx" type="text" />
+                        <Input {...field} id="Name" placeholder="600xx" type="text" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
