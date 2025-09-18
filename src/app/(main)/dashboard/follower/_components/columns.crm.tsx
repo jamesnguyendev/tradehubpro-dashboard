@@ -32,7 +32,6 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     accessorKey: "password",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
     cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.password}</span>,
-    enableSorting: true,
     meta: { title: "Mật khẩu" },
   },
   {
