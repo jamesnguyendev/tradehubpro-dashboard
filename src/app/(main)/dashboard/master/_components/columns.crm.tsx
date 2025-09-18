@@ -13,7 +13,6 @@ import {
 
 import { MasterConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
-import { TableCellViewer } from "./table-cell-viewer";
 import UpdateMaster from "./update-master";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
@@ -49,9 +48,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
   {
     accessorKey: "id",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
-    },
+    cell: ({ row }) => <span>{row.original.id}</span>,
     enableSorting: false,
     enableHiding: false,
   },

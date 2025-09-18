@@ -1,4 +1,4 @@
-import { MessageSquare, Users, LayoutDashboard, type LucideIcon, LogOut } from "lucide-react";
+import { MessageSquare, Users, LayoutDashboard, type LucideIcon, CircleDollarSign } from "lucide-react";
 
 export interface NavSubItem {
   title: string;
@@ -50,6 +50,11 @@ export const sidebarItems: NavGroup[] = [
         title: "Master",
         url: "/dashboard/master",
         icon: MessageSquare,
+      },
+      {
+        title: "Profit",
+        url: "/dashboard/profit",
+        icon: CircleDollarSign,
       },
     ],
   },
