@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-import bcrypt from "bcryptjs";
-
 import { connectToDatabase } from "@/lib/mongodb";
 import Profit from "@/models/profit";
 
@@ -11,22 +9,20 @@ export async function GET() {
   return NextResponse.json(profit);
 }
 
-// export async function POST(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function POST(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id, server, period, percent, balance, name, password } = await req.json();
+    const { id, masterId, profit } = await req.json();
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    await Profit.create({ id, masterId, profit });
 
-//     await Master.create({ id, server, period, percent, balance, name, password: hashedPassword });
-
-//     return NextResponse.json({ status: 201 });
-//   } catch (error) {
-//     console.error("Error creating Master:", error);
-//     return NextResponse.json({ error: "Failed to create Master" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 201 });
+  } catch (error) {
+    console.error("Error creating Profit:", error);
+    return NextResponse.json({ error: "Failed to create Profit" }, { status: 500 });
+  }
+}
 
 // export async function DELETE(req: Request) {
 //   try {

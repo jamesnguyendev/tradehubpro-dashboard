@@ -14,6 +14,6 @@ const ProfitSchema = new Schema(
   },
 );
 
-const Master = models.Profit || model("Profit", ProfitSchema);
+const Profit = models.Profit || model("Profit", ProfitSchema);
 
-export default Master;
+export default Profit;

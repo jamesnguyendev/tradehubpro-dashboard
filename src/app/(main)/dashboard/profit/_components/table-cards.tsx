@@ -1,6 +1,6 @@
 "use client";
 
-import AddMaster from "@/components/dashboard/master/add-master";
+import AddProfit from "@/components/dashboard/profit/add-profit";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
@@ -34,7 +34,7 @@ export function TableCards({ data }: { data: profit[] }) {
           <CardAction>
             <div className="flex items-center gap-2">
               <DataTableViewOptions table={table} />
-              <AddMaster />
+              <AddProfit />
             </div>
           </CardAction>
         </CardHeader>
