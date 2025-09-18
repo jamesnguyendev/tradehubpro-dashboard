@@ -26,7 +26,7 @@ export function SearchDialog() {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
@@ -45,7 +45,7 @@ export function SearchDialog() {
         <Search className="size-4" />
         Tìm kiếm...
         <kbd className="bg-muted inline-flex h-5 items-center gap-1 rounded border px-1.5 text-[10px] font-medium select-none">
-          <span className="text-xs">⌘</span>J
+          <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>

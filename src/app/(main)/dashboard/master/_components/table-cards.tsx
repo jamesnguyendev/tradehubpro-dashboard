@@ -1,5 +1,6 @@
 "use client";
 
+import DebouncedInput from "@/components/custom/debounce-input";
 import AddMaster from "@/components/dashboard/master/add-master";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
@@ -33,10 +34,16 @@ export function TableCards({ data }: { data: master[] }) {
     <div className="grid grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs">
       <Card>
         <CardHeader>
-          <CardTitle>Master gần đây</CardTitle>
-          <CardDescription>Theo dõi và quản lý trạng thái của họ.</CardDescription>
+          <CardTitle className="hidden xl:block">Master gần đây</CardTitle>
+          <CardDescription className="hidden xl:block">Theo dõi và quản lý trạng thái của họ.</CardDescription>
           <CardAction>
             <div className="flex items-center gap-2">
+              <DebouncedInput
+                value={table.getState().globalFilter ?? ""}
+                onChange={(value) => table.setGlobalFilter(String(value))}
+                className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 outline-none has-[>svg]:px-2.5"
+                placeholder="Tìm tất cả nội dung"
+              />
               <DataTableViewOptions table={table} />
               <AddMaster />
             </div>
