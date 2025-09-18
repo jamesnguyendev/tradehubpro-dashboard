@@ -125,7 +125,7 @@ const AddFollower = () => {
                     <FormItem className="flex flex-col gap-3">
                       <FormLabel htmlFor="password">Password</FormLabel>
                       <FormControl>
-                        <Input {...field} id="Password" placeholder="**xxx***" type="password" />
+                        <Input {...field} id="Password" placeholder="**xx***" type="password" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
