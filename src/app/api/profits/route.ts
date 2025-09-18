@@ -39,27 +39,21 @@ export async function POST(req: Request) {
 //   }
 // }
 
-// export async function PUT(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function PUT(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id, server, period, percent, balance, name, password } = await req.json();
+    const { id, masterId, profit } = await req.json();
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    if (!id) {
+      return NextResponse.json({ error: "Missing Master id" }, { status: 400 });
+    }
 
-//     if (!id) {
-//       return NextResponse.json({ error: "Missing Master id" }, { status: 400 });
-//     }
+    await Profit.findOneAndUpdate({ id }, { $set: { masterId, profit } }, { new: true });
 
-//     await Master.findOneAndUpdate(
-//       { id },
-//       { $set: { server, period, percent, balance, name, password: hashedPassword } },
-//       { new: true },
-//     );
-
-//     return NextResponse.json({ status: 200 });
-//   } catch (error) {
-//     console.error("Error putting Master:", error);
-//     return NextResponse.json({ error: "Failed to put Master" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error putting profit:", error);
+    return NextResponse.json({ error: "Failed to put profit" }, { status: 500 });
+  }
+}

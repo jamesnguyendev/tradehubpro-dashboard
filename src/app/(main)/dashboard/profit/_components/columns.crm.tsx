@@ -13,7 +13,7 @@ import {
 
 import { MasterConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
-// import UpdateMaster from "./update-master";
+import UpdateProfit from "./update-profit";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   {
@@ -70,7 +70,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          {/* <UpdateMaster item={row.original} /> */}
+          <UpdateProfit item={row.original} />
           <DropdownMenuSeparator />
           <MasterConfirm id={row.original.id} />
         </DropdownMenuContent>
