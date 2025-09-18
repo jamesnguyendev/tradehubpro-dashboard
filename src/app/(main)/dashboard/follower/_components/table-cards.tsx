@@ -42,7 +42,10 @@ export function TableCards({ data }: { data: follower[] }) {
           <div className="overflow-hidden rounded-md border">
             <DataTable table={table} columns={recentLeadsColumns} />
           </div>
-          <DataTablePagination table={table} />
+          <div className="flex flex-col justify-between gap-1.5 md:flex-row">
+            <div className="px-4 text-sm font-medium">Tổng số follower: {table.getRowCount()}</div>
+            <DataTablePagination table={table} />
+          </div>
         </CardContent>
       </Card>
     </div>

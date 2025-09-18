@@ -20,20 +20,19 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     accessorKey: "id",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Follower ID" />,
     cell: ({ row }) => <span>{row.original.id}</span>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
   },
   {
     accessorKey: "masterId",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
     cell: ({ row }) => <span>{row.original.masterId}</span>,
-    enableSorting: false,
+    enableSorting: true,
   },
   {
     accessorKey: "password",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Mật khẩu" />,
     cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.password}</span>,
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Mật khẩu" },
   },
   {
@@ -45,7 +44,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
 
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
-    enableSorting: false,
+    enableSorting: true,
   },
   {
     accessorKey: "updatedAt",
@@ -55,7 +54,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
       const date = row.original.updatedAt ? new Date(row.original.updatedAt) : "Không dữ liệu";
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
-    enableSorting: false,
+    enableSorting: true,
   },
   {
     header: "Hành động",

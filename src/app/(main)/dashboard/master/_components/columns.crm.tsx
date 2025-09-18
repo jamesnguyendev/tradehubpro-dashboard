@@ -49,14 +49,13 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     accessorKey: "id",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Master ID" />,
     cell: ({ row }) => <span>{row.original.id}</span>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
   },
   {
     accessorKey: "name",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Tên" />,
     cell: ({ row }) => <span>{row.original.name}</span>,
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Tên" },
   },
   {
@@ -70,21 +69,21 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     accessorKey: "period",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Chu kỳ" />,
     cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.period}</span>,
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Chu kỳ" },
   },
   {
     accessorKey: "percent",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Phần trăm" />,
     cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.percent}</span>,
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Phần trăm" },
   },
   {
     accessorKey: "balance",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Số dư" />,
     cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.balance}</span>,
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Số dư" },
   },
   {
@@ -102,7 +101,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
 
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Ngày tạo" },
   },
   {
@@ -113,7 +112,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
 
       return <span className="text-muted-foreground tabular-nums">{date.toLocaleString()}</span>;
     },
-    enableSorting: false,
+    enableSorting: true,
     meta: { title: "Ngày cập nhật" },
   },
   {
