@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { DeleteMaster } from "@/actions";
+import { DeleteProfit } from "@/actions";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -12,7 +12,7 @@ export function MasterConfirm({ id }: { id: number }) {
   const router = useRouter();
 
   const handleDelete = () => {
-    DeleteMaster(id);
+    DeleteProfit(id);
     router.refresh();
     setOpen(false);
   };
