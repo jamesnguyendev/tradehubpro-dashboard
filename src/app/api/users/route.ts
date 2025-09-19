@@ -26,38 +26,32 @@ export async function POST(req: Request) {
   }
 }
 
-// export async function DELETE(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function DELETE(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id } = await req.json();
+    const { id } = await req.json();
 
-//     await User.deleteOne({ _id: id });
+    await User.deleteOne({ _id: id });
 
-//     return NextResponse.json({ status: 200 });
-//   } catch (error) {
-//     console.error("Error deleting follower:", error);
-//     return NextResponse.json({ error: "Failed to delete follower" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error deleting User:", error);
+    return NextResponse.json({ error: "Failed to delete User" }, { status: 500 });
+  }
+}
 
-// export async function PUT(req: Request) {
-//   try {
-//     await connectToDatabase();
+export async function PUT(req: Request) {
+  try {
+    await connectToDatabase();
 
-//     const { id, masterId, password } = await req.json();
+    const { id, name, email, phone } = await req.json();
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    await User.findOneAndUpdate({ _id: id }, { $set: { name, email, phone } }, { new: true });
 
-//     if (!id) {
-//       return NextResponse.json({ error: "Missing id" }, { status: 400 });
-//     }
-
-//     await Follower.findOneAndUpdate({ id }, { $set: { masterId, password: hashedPassword } }, { new: true });
-
-//     return NextResponse.json({ status: 200 });
-//   } catch (error) {
-//     console.error("Error putting follower:", error);
-//     return NextResponse.json({ error: "Failed to put follower" }, { status: 500 });
-//   }
-// }
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error("Error putting User:", error);
+    return NextResponse.json({ error: "Failed to put User" }, { status: 500 });
+  }
+}

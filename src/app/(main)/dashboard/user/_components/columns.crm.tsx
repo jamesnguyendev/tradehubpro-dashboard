@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { CircleCheck, CircleX, EllipsisVertical, Loader } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import z from "zod";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
@@ -14,7 +14,7 @@ import {
 
 import { DeleteConfirm } from "./delete-confirm";
 import { recentLeadSchema } from "./schema";
-// import { UpdateFollower } from "./update-follower";
+import { UpdateUser } from "./update-user";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] = [
   {
@@ -42,19 +42,36 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
     cell: ({ row }) => {
       const status = row.original.verify;
 
+      const statusColor =
+        status === "approved"
+          ? "text-green-500 dark:text-green-400 border-green-500"
+          : status === "rejected"
+            ? "text-red-500 dark:text-red-300 border-red-300"
+            : "text-black-500 dark:text-gray-400";
+
       return (
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {status === "approved" ? (
-            <CircleCheck className="stroke-border fill-green-500 dark:fill-green-400" />
-          ) : status === "rejected" ? (
-            <CircleX className="stroke-border fill-red-500 dark:fill-red-400" />
-          ) : (
-            <Loader className="animate-spin" />
-          )}
-          <span className="ml-1">{status}</span>
+        <Badge variant="outline" className={`px-1.5 font-medium capitalize ${statusColor}`}>
+          {status}
         </Badge>
       );
     },
+    // cell: ({ row }) => {
+    //   const status = row.original.verify;
+
+    //   return (
+    //     <Badge variant="outline" className="text-muted-foreground px-1.5">
+    //       {status === "approved" ? (
+    //         <CircleCheck className="stroke-border fill-green-500 dark:fill-green-400" />
+    //       ) : status === "rejected" ? (
+    //         <CircleX className="stroke-border fill-red-500 dark:fill-red-400" />
+    //       ) : (
+    //         <Loader className="animate-spin" />
+    //       )}
+    //       <span className="ml-1">{status}</span>
+    //     </Badge>
+    //   );
+    // },
+    meta: { title: "Trạng thái" },
     enableSorting: true,
   },
 
@@ -91,7 +108,7 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          {/* <UpdateFollower item={row.original} /> */}
+          <UpdateUser item={row.original} />
           <DropdownMenuSeparator />
           <DeleteConfirm id={row.original._id} />
         </DropdownMenuContent>
