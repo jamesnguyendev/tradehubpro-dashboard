@@ -78,9 +78,7 @@ export function UpdateUser({ item }: { item: z.infer<typeof recentLeadSchema> })
         phone: values.phone,
       };
 
-      const res = await updateUser(data);
-
-      if (res.status !== 200) return;
+      await updateUser(data);
 
       toast.success("Cập nhật người dùng thành công!");
 
@@ -112,66 +110,59 @@ export function UpdateUser({ item }: { item: z.infer<typeof recentLeadSchema> })
             <DrawerHeader className="gap-1">
               <DrawerTitle>Cập nhật người dùng</DrawerTitle>
             </DrawerHeader>
-            <DrawerContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col gap-4">
-                  <DrawerHeader className="gap-1">
-                    <DrawerTitle>Thêm mới người dùng </DrawerTitle>
-                  </DrawerHeader>
-                  <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
-                    <div className="flex flex-col gap-4">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-col gap-3">
-                            <FormLabel htmlFor="name">Tên người dùng</FormLabel>
-                            <FormControl>
-                              <Input {...field} id="name" placeholder="John height" type="text" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-col gap-3">
-                            <FormLabel htmlFor="email">Email</FormLabel>
-                            <FormControl>
-                              <Input {...field} id="email" placeholder="example@gmail" type="email" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-col gap-3">
-                            <FormLabel htmlFor="phone">Số điện thoại</FormLabel>
-                            <FormControl>
-                              <Input {...field} id="phone" placeholder="098873845" type="number" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <DrawerFooter>
-                    <Button disabled={loading} type="submit">
-                      {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Xác nhận"}
-                    </Button>
-                    <DrawerClose asChild>
-                      <Button variant="outline">Thoát</Button>
-                    </DrawerClose>
-                  </DrawerFooter>
-                </form>
-              </Form>
-            </DrawerContent>
+
+            <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
+              <div className="flex flex-col gap-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel htmlFor="name">Tên người dùng</FormLabel>
+                      <FormControl>
+                        <Input {...field} id="name" placeholder="John height" type="text" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <FormControl>
+                        <Input {...field} id="email" placeholder="example@gmail" type="email" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel htmlFor="phone">Số điện thoại</FormLabel>
+                      <FormControl>
+                        <Input {...field} id="phone" placeholder="098873845" type="number" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            <DrawerFooter>
+              <Button disabled={loading} type="submit">
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Xác nhận"}
+              </Button>
+              <DrawerClose asChild>
+                <Button variant="outline">Thoát</Button>
+              </DrawerClose>
+            </DrawerFooter>
           </form>
         </Form>
       </DrawerContent>
