@@ -3,7 +3,7 @@ import * as React from "react";
 
 import Link from "next/link";
 
-import { LayoutDashboard, Search, Users, MessageSquare } from "lucide-react";
+import { LayoutDashboard, Search, Users, MessageSquare, Link as LinkIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +18,7 @@ import {
 
 const searchItems = [
   { group: "Tổng quan", icon: LayoutDashboard, label: "Trang chủ", link: "/dashboard/default" },
+  { group: "Tổng quan", icon: LinkIcon, label: "Người dùng", link: "/dashboard/user" },
   { group: "Copy Trade", icon: Users, label: "Follower", link: "/dashboard/follower", disabled: true },
   { group: "Copy Trade", icon: MessageSquare, label: "Master", link: "/dashboard/master", disabled: true },
 ];

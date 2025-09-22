@@ -42,10 +42,6 @@ export function DataTable() {
       if (change.operationType === "update" || change.operationType === "replace") {
         setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
       }
-
-      if (change.operationType === "delete") {
-        setData((prev) => prev.filter((item) => item._id !== change.documentKey._id));
-      }
     };
 
     return () => {
