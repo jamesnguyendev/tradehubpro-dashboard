@@ -29,6 +29,30 @@ export function DataTable() {
     fetchData();
   }, [status]);
 
+  React.useEffect(() => {
+    const evtSource = new EventSource(`/api/verify/stream?verify=${status}`);
+
+    evtSource.onmessage = (e) => {
+      const change = JSON.parse(e.data);
+
+      if (change.operationType === "insert") {
+        setData((prev) => [change.fullDocument, ...prev]);
+      }
+
+      if (change.operationType === "update" || change.operationType === "replace") {
+        setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
+      }
+
+      if (change.operationType === "delete") {
+        setData((prev) => prev.filter((item) => item._id !== change.documentKey._id));
+      }
+    };
+
+    return () => {
+      evtSource.close();
+    };
+  }, [status]);
+
   return (
     <Tabs value={status} onValueChange={(val) => setStatus(val as any)} className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between">

@@ -113,11 +113,11 @@ async function main() {
   const formatted = await prettier.format(updated, { parser: "typescript" });
 
   if (formatted === fileContent) {
-     return;
+    return;
   }
 
   fs.writeFileSync(outputPath, formatted);
- }
+}
 
 main().catch((err) => {
   console.error("❌ Unexpected error while generating theme presets:", err);
