@@ -55,26 +55,10 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof recentLeadSchema>>[] =
         </Badge>
       );
     },
-    // cell: ({ row }) => {
-    //   const status = row.original.verify;
 
-    //   return (
-    //     <Badge variant="outline" className="text-muted-foreground px-1.5">
-    //       {status === "approved" ? (
-    //         <CircleCheck className="stroke-border fill-green-500 dark:fill-green-400" />
-    //       ) : status === "rejected" ? (
-    //         <CircleX className="stroke-border fill-red-500 dark:fill-red-400" />
-    //       ) : (
-    //         <Loader className="animate-spin" />
-    //       )}
-    //       <span className="ml-1">{status}</span>
-    //     </Badge>
-    //   );
-    // },
     meta: { title: "Trạng thái" },
     enableSorting: true,
   },
-
   {
     accessorKey: "createdAt",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày tạo" />,

@@ -2,9 +2,6 @@
 
 import * as React from "react";
 
-import { z } from "zod";
-
-import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,62 +13,64 @@ import { DataTableViewOptions } from "../../../../../components/data-table/data-
 import { withDndColumn } from "../../../../../components/data-table/table-utils";
 
 import { dashboardColumns } from "./columns";
-import { sectionSchema } from "./schema";
 
-export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
-  const [data, setData] = React.useState(() => initialData);
+export function DataTable() {
+  const [data, setData] = React.useState<any[]>([]);
+  const [status, setStatus] = React.useState<"pending" | "approved" | "rejected">("pending");
   const columns = withDndColumn(dashboardColumns);
-  const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
+  const table = useDataTableInstance({ data, columns, getRowId: (row) => row._id.toString() });
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/verify?verify=${status}`);
+      const result = await res.json();
+      setData(result);
+    }
+    fetchData();
+  }, [status]);
 
   return (
-    <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
+    <Tabs value={status} onValueChange={(val) => setStatus(val as any)} className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between">
         <Label htmlFor="view-selector" className="sr-only">
           lọc cột
         </Label>
-        <Select defaultValue="outline">
+        <Select value={status}>
           <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="outline">Duyệt đăng nhập</SelectItem>
-            <SelectItem value="past-performance">Đã đăng nhập</SelectItem>
-            {/* <SelectItem value="key-personnel">Key Personnel</SelectItem>
-            <SelectItem value="focus-documents">Focus Documents</SelectItem> */}
+            <SelectItem value="pending">Duyệt đăng nhập</SelectItem>
+            <SelectItem value="approved">Đã đăng nhập</SelectItem>
+            <SelectItem value="rejected">Từ chối</SelectItem>
           </SelectContent>
         </Select>
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="outline">Duyệt đăng nhập</TabsTrigger>
-          <TabsTrigger value="past-performance">
-            Đã duyệt <Badge variant="secondary">3</Badge>
-          </TabsTrigger>
-          {/* <TabsTrigger value="key-personnel">
-            Key Personnel <Badge variant="secondary">2</Badge>
-          </TabsTrigger>
-          <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger> */}
+          <TabsTrigger value="pending">Duyệt đăng nhập</TabsTrigger>
+          <TabsTrigger value="approved">Đã duyệt</TabsTrigger>
+          <TabsTrigger value="rejected">Từ chối</TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
           <DataTableViewOptions table={table} />
-          {/* <Button variant="outline" size="sm">
-            <Plus />
-            <span className="hidden lg:inline">Add Section</span>
-          </Button> */}
         </div>
       </div>
-      <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto">
+      <TabsContent value="pending" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
-      <TabsContent value="past-performance" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="approved" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+        </div>
+        <DataTablePagination table={table} />
       </TabsContent>
-      <TabsContent value="key-personnel" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
-      </TabsContent>
-      <TabsContent value="focus-documents" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="rejected" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+        </div>
+        <DataTablePagination table={table} />
       </TabsContent>
     </Tabs>
   );
