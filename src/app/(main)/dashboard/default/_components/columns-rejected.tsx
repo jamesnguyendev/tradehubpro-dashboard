@@ -37,6 +37,7 @@ export const dashboardColumnsRejected: ColumnDef<z.infer<typeof sectionSchema>>[
         </Badge>
       );
     },
+    meta: { title: "Trạng thái" },
   },
   {
     accessorKey: "email",

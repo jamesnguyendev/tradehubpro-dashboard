@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CircleCheck, Loader, EllipsisVertical, CircleX } from "lucide-react";
 import { z } from "zod";
 
+import { handleApproved } from "@/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +46,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
         </Badge>
       );
     },
+    meta: { title: "Trạng thái" },
   },
   {
     accessorKey: "email",
@@ -66,7 +68,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   {
     header: "Xác thực",
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
@@ -75,7 +77,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Đồng ý</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleApproved(row.original._id)}>Đồng ý</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">Từ chối</DropdownMenuItem>
         </DropdownMenuContent>

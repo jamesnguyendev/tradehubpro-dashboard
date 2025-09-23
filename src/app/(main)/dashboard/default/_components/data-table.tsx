@@ -71,6 +71,22 @@ export function DataTable() {
     };
   }, [status]);
 
+  React.useEffect(() => {
+    const evtSourceApproved = new EventSource(`/api/verify/approved/stream`);
+
+    evtSourceApproved.onmessage = (e) => {
+      const change = JSON.parse(e.data);
+
+      if (change.operationType === "update" || change.operationType === "replace") {
+        setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
+      }
+    };
+
+    return () => {
+      evtSourceApproved.close();
+    };
+  }, []);
+
   if (!mounted) {
     return <p>Đang tải dữ liệu...</p>;
   }
