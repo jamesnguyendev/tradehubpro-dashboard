@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import axios from "axios";
+
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,15 +18,19 @@ import { dashboardColumns } from "./columns";
 
 export function DataTable() {
   const [data, setData] = React.useState<any[]>([]);
+  const [mounted, setMounted] = React.useState(false);
   const [status, setStatus] = React.useState<"pending" | "approved" | "rejected">("pending");
   const columns = withDndColumn(dashboardColumns);
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row._id.toString() });
 
   React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  React.useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`/api/verify?verify=${status}`);
-      const result = await res.json();
-      setData(result);
+      const res = await axios.get(`/api/verify?verify=${status}`);
+      setData(res.data);
     }
     fetchData();
   }, [status]);
@@ -48,6 +54,10 @@ export function DataTable() {
       evtSource.close();
     };
   }, [status]);
+
+  if (!mounted) {
+    return <p>Đang tải dữ liệu...</p>;
+  }
 
   return (
     <Tabs value={status} onValueChange={(val) => setStatus(val as any)} className="w-full flex-col justify-start gap-6">
