@@ -15,13 +15,29 @@ import { DataTableViewOptions } from "../../../../../components/data-table/data-
 import { withDndColumn } from "../../../../../components/data-table/table-utils";
 
 import { dashboardColumns } from "./columns";
+import { dashboardColumnsApproved } from "./columns-approved";
+import { dashboardColumnsRejected } from "./columns-rejected";
 
 export function DataTable() {
   const [data, setData] = React.useState<any[]>([]);
   const [mounted, setMounted] = React.useState(false);
   const [status, setStatus] = React.useState<"pending" | "approved" | "rejected">("pending");
   const columns = withDndColumn(dashboardColumns);
-  const table = useDataTableInstance({ data, columns, getRowId: (row) => row._id.toString() });
+  const columnsApproved = withDndColumn(dashboardColumnsApproved);
+  const columnsRejected = withDndColumn(dashboardColumnsRejected);
+
+  const getColumns = React.useCallback(() => {
+    switch (status) {
+      case "approved":
+        return columnsApproved;
+      case "rejected":
+        return columnsRejected;
+      default:
+        return columns;
+    }
+  }, [status, columns, columnsApproved, columnsRejected]);
+
+  const table = useDataTableInstance({ data, columns: getColumns(), getRowId: (row) => row._id.toString() });
 
   React.useEffect(() => {
     setMounted(true);
@@ -92,13 +108,13 @@ export function DataTable() {
       </TabsContent>
       <TabsContent value="approved" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          <DataTableNew dndEnabled table={table} columns={columnsApproved} onReorder={setData} />
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
       <TabsContent value="rejected" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          <DataTableNew dndEnabled table={table} columns={columnsRejected} onReorder={setData} />
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
