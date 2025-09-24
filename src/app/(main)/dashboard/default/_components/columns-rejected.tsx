@@ -65,7 +65,7 @@ export const dashboardColumnsRejected: ColumnDef<z.infer<typeof sectionSchema>>[
     enableSorting: true,
   },
   {
-    header: "Xác thực",
+    header: "Hành động",
     id: "actions",
     cell: ({ row }) => (
       <DropdownMenu>
@@ -76,8 +76,8 @@ export const dashboardColumnsRejected: ColumnDef<z.infer<typeof sectionSchema>>[
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem variant="destructive" onClick={() => handleApproved(row.original._id)}>
-            Gỡ Chặn
+          <DropdownMenuItem variant="default" onClick={() => handleApproved(row.original._id)}>
+            Duyệt lại
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

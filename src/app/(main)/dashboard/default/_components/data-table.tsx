@@ -129,7 +129,9 @@ export function DataTable() {
       </div>
       <TabsContent value="pending" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          <React.Suspense fallback={<p>Đang nạp dữ liệu...</p>}>
+            <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          </React.Suspense>
         </div>
         <DataTablePagination table={table} />
       </TabsContent>

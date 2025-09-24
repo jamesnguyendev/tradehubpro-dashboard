@@ -65,7 +65,7 @@ export const dashboardColumnsApproved: ColumnDef<z.infer<typeof sectionSchema>>[
     enableSorting: true,
   },
   {
-    header: "Xác thực",
+    header: "Hành động",
     id: "actions",
     cell: ({ row }) => (
       <DropdownMenu>
