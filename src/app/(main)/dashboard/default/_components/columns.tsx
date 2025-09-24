@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CircleCheck, Loader, EllipsisVertical, CircleX } from "lucide-react";
 import { z } from "zod";
 
-import { handleApproved } from "@/actions";
+import { handleApproved, handleRejected } from "@/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -79,7 +79,9 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
         <DropdownMenuContent align="end" className="w-32">
           <DropdownMenuItem onClick={() => handleApproved(row.original._id)}>Đồng ý</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Từ chối</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive" onClick={() => handleRejected(row.original._id)}>
+            Từ chối
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),

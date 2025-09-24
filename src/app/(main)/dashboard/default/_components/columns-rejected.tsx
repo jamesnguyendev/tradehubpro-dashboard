@@ -1,8 +1,16 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { CircleCheck, Loader, CircleX } from "lucide-react";
+import { CircleCheck, Loader, CircleX, EllipsisVertical } from "lucide-react";
 import { z } from "zod";
 
+import { handleApproved } from "@/actions";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { DataTableColumnHeader } from "../../../../../components/data-table/data-table-column-header";
 
@@ -56,4 +64,24 @@ export const dashboardColumnsRejected: ColumnDef<z.infer<typeof sectionSchema>>[
     },
     enableSorting: true,
   },
+  // {
+  //   header: "Xác thực",
+  //   id: "actions",
+  //   cell: ({ row }) => (
+  //     <DropdownMenu>
+  //       <DropdownMenuTrigger asChild>
+  //         <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
+  //           <EllipsisVertical />
+  //           <span className="sr-only">Open menu</span>
+  //         </Button>
+  //       </DropdownMenuTrigger>
+  //       <DropdownMenuContent align="end" className="w-32">
+  //         <DropdownMenuItem variant="destructive" onClick={() => handleApproved(row.original._id)}>
+  //           Gỡ Chặn
+  //         </DropdownMenuItem>
+  //       </DropdownMenuContent>
+  //     </DropdownMenu>
+  //   ),
+  //   enableSorting: false,
+  // },
 ];

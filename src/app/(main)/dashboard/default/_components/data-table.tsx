@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
+import { useSSE } from "@/hooks/use-sse";
 
 import { DataTable as DataTableNew } from "../../../../../components/data-table/data-table";
 import { DataTablePagination } from "../../../../../components/data-table/data-table-pagination";
@@ -17,6 +18,20 @@ import { withDndColumn } from "../../../../../components/data-table/table-utils"
 import { dashboardColumns } from "./columns";
 import { dashboardColumnsApproved } from "./columns-approved";
 import { dashboardColumnsRejected } from "./columns-rejected";
+
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  verify: "pending" | "approved" | "rejected";
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ChangeEvent<T> {
+  operationType: "insert" | "update" | "replace" | "delete";
+  fullDocument: T;
+}
 
 export function DataTable() {
   const [data, setData] = React.useState<any[]>([]);
@@ -71,21 +86,17 @@ export function DataTable() {
     };
   }, [status]);
 
-  React.useEffect(() => {
-    const evtSourceApproved = new EventSource(`/api/verify/approved/stream`);
+  useSSE<ChangeEvent<User>>(`/api/verify/approved/stream`, (change) => {
+    if (change.operationType === "update" || change.operationType === "replace") {
+      setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
+    }
+  });
 
-    evtSourceApproved.onmessage = (e) => {
-      const change = JSON.parse(e.data);
-
-      if (change.operationType === "update" || change.operationType === "replace") {
-        setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
-      }
-    };
-
-    return () => {
-      evtSourceApproved.close();
-    };
-  }, []);
+  useSSE<ChangeEvent<User>>(`/api/verify/rejected/stream`, (change) => {
+    if (change.operationType === "update" || change.operationType === "replace") {
+      setData((prev) => prev.map((item) => (item._id === change.fullDocument._id ? change.fullDocument : item)));
+    }
+  });
 
   if (!mounted) {
     return <p>Đang tải dữ liệu...</p>;

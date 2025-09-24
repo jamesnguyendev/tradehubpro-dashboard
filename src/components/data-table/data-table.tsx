@@ -41,7 +41,7 @@ function renderTableBody<TData, TValue>({
     return (
       <TableRow>
         <TableCell colSpan={columns.length} className="h-24 text-center">
-          Không tìm thấy.
+          Chưa có dữ liệu.
         </TableCell>
       </TableRow>
     );
