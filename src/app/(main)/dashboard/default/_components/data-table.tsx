@@ -18,6 +18,7 @@ import { withDndColumn } from "../../../../../components/data-table/table-utils"
 import { dashboardColumns } from "./columns";
 import { dashboardColumnsApproved } from "./columns-approved";
 import { dashboardColumnsRejected } from "./columns-rejected";
+import SkeletonTable from "./skeleton-table";
 
 interface User {
   _id: string;
@@ -37,6 +38,7 @@ export function DataTable() {
   const [data, setData] = React.useState<any[]>([]);
   const [mounted, setMounted] = React.useState(false);
   const [status, setStatus] = React.useState<"pending" | "approved" | "rejected">("pending");
+  const [loading, setLoading] = React.useState(false);
   const columns = withDndColumn(dashboardColumns);
   const columnsApproved = withDndColumn(dashboardColumnsApproved);
   const columnsRejected = withDndColumn(dashboardColumnsRejected);
@@ -60,8 +62,13 @@ export function DataTable() {
 
   React.useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(`/api/verify?verify=${status}`);
-      setData(res.data);
+      setLoading(true);
+      try {
+        const res = await axios.get(`/api/verify?verify=${status}`);
+        setData(res.data);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchData();
   }, [status]);
@@ -129,21 +136,33 @@ export function DataTable() {
       </div>
       <TabsContent value="pending" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <React.Suspense fallback={<p>Đang nạp dữ liệu...</p>}>
+          {loading && status === "pending" ? (
+            <SkeletonTable />
+          ) : (
             <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
-          </React.Suspense>
+          )}
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
+
       <TabsContent value="approved" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columnsApproved} onReorder={setData} />
+          {loading && status === "approved" ? (
+            <SkeletonTable />
+          ) : (
+            <DataTableNew dndEnabled table={table} columns={columnsApproved} onReorder={setData} />
+          )}
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
+
       <TabsContent value="rejected" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columnsRejected} onReorder={setData} />
+          {loading && status === "rejected" ? (
+            <SkeletonTable />
+          ) : (
+            <DataTableNew dndEnabled table={table} columns={columnsRejected} onReorder={setData} />
+          )}
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
