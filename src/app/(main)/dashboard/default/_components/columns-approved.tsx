@@ -50,7 +50,7 @@ export const dashboardColumnsApproved: ColumnDef<z.infer<typeof sectionSchema>>[
   {
     accessorKey: "email",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
-    cell: ({ row }) => <div className="w-32">{row.original.email}</div>,
+    cell: ({ row }) => <div className="">{row.original.email}</div>,
     enableSorting: false,
   },
   {

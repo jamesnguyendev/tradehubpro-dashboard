@@ -4,6 +4,7 @@ import * as React from "react";
 
 import axios from "axios";
 
+import DebouncedInput from "@/components/custom/debounce-input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -115,13 +116,13 @@ export function DataTable() {
         <Label htmlFor="view-selector" className="sr-only">
           lọc cột
         </Label>
-        <Select value={status}>
+        <Select value={status} onValueChange={(val) => setStatus(val as any)}>
           <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
-            <SelectValue placeholder="Select a view" />
+            <SelectValue placeholder="Chọn loại" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="pending">Duyệt đăng nhập</SelectItem>
-            <SelectItem value="approved">Đã đăng nhập</SelectItem>
+            <SelectItem value="approved">Đã duyệt</SelectItem>
             <SelectItem value="rejected">Từ chối</SelectItem>
           </SelectContent>
         </Select>
@@ -130,7 +131,14 @@ export function DataTable() {
           <TabsTrigger value="approved">Đã duyệt</TabsTrigger>
           <TabsTrigger value="rejected">Từ chối</TabsTrigger>
         </TabsList>
+
         <div className="flex items-center gap-2">
+          <DebouncedInput
+            value={table.getState().globalFilter ?? ""}
+            onChange={(value) => table.setGlobalFilter(String(value))}
+            className="col-span-4 h-8 w-full gap-1.5 rounded-md border px-3 text-sm font-medium outline-none has-[>svg]:px-2.5"
+            placeholder="Tìm: Tên, email."
+          />
           <DataTableViewOptions table={table} />
         </div>
       </div>
