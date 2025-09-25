@@ -7,7 +7,6 @@ export default async function Page() {
   if (!followers) {
     return <div>Không có follower</div>;
   }
-  console.log("follower!!!", followers);
   return (
     <div className="flex flex-col gap-4 md:gap-6">
       {/* <OverviewCards /> */}
