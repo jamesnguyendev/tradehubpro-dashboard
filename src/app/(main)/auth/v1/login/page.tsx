@@ -1,5 +1,3 @@
-import { Command } from "lucide-react";
-
 import { LoginForm } from "../../_components/login-form";
 
 export default function LoginV1() {
@@ -8,7 +6,7 @@ export default function LoginV1() {
       <div className="bg-primary hidden lg:block lg:w-1/3">
         <div className="flex h-full flex-col items-center justify-center p-12 text-center">
           <div className="space-y-6">
-             <div className="space-y-2">
+            <div className="space-y-2">
               <h1 className="text-primary-foreground text-5xl font-light">TradeHubPro</h1>
               <p className="text-primary-foreground/80 text-xl">Đăng nhập để tiếp tục</p>
             </div>
