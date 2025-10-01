@@ -75,7 +75,9 @@ A list of the main technologies and libraries used in this project:
    ```env
    NEXTAUTH_SECRET=your_secret
    NEXTAUTH_URL=http://localhost:3000
-
+   EMAIL="youremail"
+   PASSWORD="yourpassword"
+   NEXT_PUBLIC_API_URL=your_local_host/api
    MONGODB_URI=mongodb://localhost:27017/tradehubpro
    ```
 
