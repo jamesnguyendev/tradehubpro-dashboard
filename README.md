@@ -39,8 +39,7 @@ A list of the main technologies and libraries used in this project:
   * Node.js (Next.js API Routes)
   * NextAuth.js (Authentication)
   * bcrypt / bcryptjs (Password Hashing)
-  * [Optional] WebSocket (Real-time updates – can be integrated)
-
+ 
 * **Database:**
   * MongoDB
   * Mongoose (ODM)
