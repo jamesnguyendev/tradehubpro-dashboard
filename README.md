@@ -93,8 +93,8 @@ A list of the main technologies and libraries used in this project:
 
 5. **Build for production:**
    ```bash
-   pnpm build
-   pnpm start
+   npm build
+   npm start
    ```
 
 ---
