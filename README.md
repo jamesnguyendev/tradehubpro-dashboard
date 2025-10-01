@@ -26,7 +26,7 @@ This application delivers **real-time charts, statistical metrics, and analytica
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Technology Stacks
 
 A list of the main technologies and libraries used in this project:
 
